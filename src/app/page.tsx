@@ -1,6 +1,26 @@
+"use client"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -49,8 +69,26 @@ const Home = () => {
               <div className="flex items-center w-1 h-full bg-green-300">
                 <p className="flex-1 px-2">Estudar React</p>
               </div>
+
               <div className="flex gap-1">
-                <SquarePen size={16} className="cursor-pointer" />
+                <Dialog>
+                  <DialogTrigger>
+                    <SquarePen size={16} className="cursor-pointer" />
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Editar tarefa</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Editar tarefa..."
+                        className="border-gray-400"
+                      />
+                      <Button className="cursor-pointer">Editar</Button>
+                    </div>
+                    <DialogClose />
+                  </DialogContent>
+                </Dialog>
                 <Trash2Icon size={16} className="cursor-pointer" />
               </div>
             </div>
@@ -71,10 +109,30 @@ const Home = () => {
               <ListCheck size={16} />
               <p className="text-xs">Tarefas concluídas(2/3)</p>
             </div>
-            <Button className="text-xs h-7 cursor-pointer" variant="outline">
-              <Trash />
-              Limpar tarefas concluídas
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger
+                render={
+                  <Button
+                    className="text-xs h-7 cursor-pointer"
+                    variant="outline"
+                  >
+                    <Trash />
+                    Limpar tarefas concluídas
+                  </Button>
+                }
+              />
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Tem certeza que deseja excluir x tarefas?
+                  </AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Sim</AlertDialogCancel>
+                  <AlertDialogAction>Não</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
 
           <div className="w-full h-3 bg-gray-200 rounded-md mt-5">
